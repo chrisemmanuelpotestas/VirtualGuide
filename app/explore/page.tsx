@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
 import { SearchFilters } from '@/components/search-filters'
 import { DestinationCard } from '@/components/destination-card'
 import { Spinner } from '@/components/ui/spinner'
@@ -126,6 +127,8 @@ export default function ExplorePage() {
           </>
         )}
       </main>
+
+      <Footer />
     </div>
   )
 }

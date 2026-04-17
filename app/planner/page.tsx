@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
 import { ItineraryBuilder } from '@/components/itinerary-builder'
 import { DestinationSelector } from '@/components/destination-selector'
 import { BudgetSummary } from '@/components/budget-summary'
@@ -335,6 +336,8 @@ export default function PlannerPage() {
           <PlannerContent />
         </Suspense>
       </main>
+
+      <Footer />
     </div>
   )
 }

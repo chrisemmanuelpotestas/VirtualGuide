@@ -113,14 +113,14 @@ export interface Review {
 
 export type CategoryType = Destination['category']
 
-export const CATEGORIES: { value: CategoryType; label: string; icon: string }[] = [
-  { value: 'beach', label: 'Beach', icon: '🏖️' },
-  { value: 'mountain', label: 'Mountain', icon: '⛰️' },
-  { value: 'cultural', label: 'Cultural', icon: '🏛️' },
-  { value: 'urban', label: 'Urban', icon: '🏙️' },
-  { value: 'adventure', label: 'Adventure', icon: '🧗' },
-  { value: 'nature', label: 'Nature', icon: '🌿' },
-  { value: 'historical', label: 'Historical', icon: '🏰' },
+export const CATEGORIES: { value: CategoryType; label: string; iconName: string }[] = [
+  { value: 'beach', label: 'Beach', iconName: 'Umbrella' },
+  { value: 'mountain', label: 'Mountain', iconName: 'Mountain' },
+  { value: 'cultural', label: 'Cultural', iconName: 'Landmark' },
+  { value: 'urban', label: 'Urban', iconName: 'Building' },
+  { value: 'adventure', label: 'Adventure', iconName: 'Compass' },
+  { value: 'nature', label: 'Nature', iconName: 'TreePine' },
+  { value: 'historical', label: 'Historical', iconName: 'Castle' },
 ]
 
 export const REGIONS = [

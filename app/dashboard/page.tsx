@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import { 
   MapPin, 
   Calendar, 
@@ -300,6 +301,8 @@ export default async function DashboardPage() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   )
 }

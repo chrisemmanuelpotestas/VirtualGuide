@@ -12,9 +12,19 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
-import { Search, SlidersHorizontal, X } from 'lucide-react'
+import { Search, SlidersHorizontal, X, Umbrella, Mountain, Landmark, Building, Compass, TreePine, Castle } from 'lucide-react'
 import { CATEGORIES, REGIONS, type CategoryType } from '@/lib/types'
 import { cn } from '@/lib/utils'
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Umbrella,
+  Mountain,
+  Landmark,
+  Building,
+  Compass,
+  TreePine,
+  Castle,
+}
 
 interface SearchFiltersProps {
   onSearch: (query: string) => void
@@ -78,23 +88,26 @@ export function SearchFilters({
 
       {/* Category Pills */}
       <div className="flex flex-wrap gap-2">
-        {CATEGORIES.map((category) => (
-          <button
-            key={category.value}
-            onClick={() =>
-              onCategoryChange(selectedCategory === category.value ? null : category.value)
-            }
-            className={cn(
-              'inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors',
-              selectedCategory === category.value
-                ? 'border-primary bg-primary text-primary-foreground'
-                : 'border-border bg-background text-foreground hover:bg-muted'
-            )}
-          >
-            <span>{category.icon}</span>
-            <span>{category.label}</span>
-          </button>
-        ))}
+        {CATEGORIES.map((category) => {
+          const IconComponent = iconMap[category.iconName]
+          return (
+            <button
+              key={category.value}
+              onClick={() =>
+                onCategoryChange(selectedCategory === category.value ? null : category.value)
+              }
+              className={cn(
+                'inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors',
+                selectedCategory === category.value
+                  ? 'border-primary bg-primary text-primary-foreground'
+                  : 'border-border bg-background text-foreground hover:bg-muted'
+              )}
+            >
+              {IconComponent && <IconComponent className="h-4 w-4" />}
+              <span>{category.label}</span>
+            </button>
+          )
+        })}
       </div>
 
       {/* Advanced Filters */}
