@@ -124,21 +124,12 @@ export const CATEGORIES: { value: CategoryType; label: string; icon: string }[] 
 ]
 
 export const REGIONS = [
-  'NCR',
-  'Cordillera Administrative Region',
-  'Ilocos Region',
-  'Cagayan Valley',
-  'Central Luzon',
-  'CALABARZON',
-  'MIMAROPA',
-  'Bicol Region',
   'Western Visayas',
+  'Mimaropa',
   'Central Visayas',
-  'Eastern Visayas',
-  'Zamboanga Peninsula',
-  'Northern Mindanao',
-  'Davao Region',
-  'SOCCSKSARGEN',
   'Caraga',
-  'BARMM',
+  'Cordillera',
+  'Ilocos',
+  'Cagayan Valley',
+  'Davao',
 ]

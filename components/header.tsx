@@ -1,11 +1,20 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
-import { MapPin, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { MapPin, Menu, X, User, LogOut, Settings } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { createClient } from '@/lib/supabase/client'
+import type { User as SupabaseUser } from '@supabase/supabase-js'
 
 const navigation = [
   { name: 'Explore', href: '/explore' },
@@ -16,7 +25,34 @@ const navigation = [
 
 export function Header() {
   const pathname = usePathname()
+  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [user, setUser] = useState<SupabaseUser | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const supabase = createClient()
+    
+    // Get initial user
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user)
+      setLoading(false)
+    })
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  const handleSignOut = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/')
+    router.refresh()
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -63,12 +99,48 @@ export function Header() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
-          <Button variant="ghost" asChild>
-            <Link href="/auth/login">Log in</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/auth/sign-up">Sign up</Link>
-          </Button>
+          {loading ? (
+            <div className="h-9 w-20 animate-pulse rounded-md bg-muted" />
+          ) : user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="gap-2">
+                  <User className="h-4 w-4" />
+                  <span className="max-w-[150px] truncate">
+                    {user.email?.split('@')[0]}
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/settings" className="flex items-center gap-2">
+                    <Settings className="h-4 w-4" />
+                    Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 text-destructive">
+                  <LogOut className="h-4 w-4" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <>
+              <Button variant="ghost" asChild>
+                <Link href="/auth/login">Log in</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/auth/sign-up">Sign up</Link>
+              </Button>
+            </>
+          )}
         </div>
       </nav>
 
@@ -92,12 +164,28 @@ export function Header() {
               </Link>
             ))}
             <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
-              <Button variant="ghost" asChild className="justify-start">
-                <Link href="/auth/login">Log in</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/auth/sign-up">Sign up</Link>
-              </Button>
+              {user ? (
+                <>
+                  <div className="px-3 py-2 text-sm text-muted-foreground">
+                    Signed in as {user.email}
+                  </div>
+                  <Button variant="ghost" asChild className="justify-start">
+                    <Link href="/dashboard">Dashboard</Link>
+                  </Button>
+                  <Button variant="ghost" onClick={handleSignOut} className="justify-start text-destructive">
+                    Sign out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" asChild className="justify-start">
+                    <Link href="/auth/login">Log in</Link>
+                  </Button>
+                  <Button asChild>
+                    <Link href="/auth/sign-up">Sign up</Link>
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>

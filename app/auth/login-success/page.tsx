@@ -14,7 +14,6 @@ export default function LoginSuccessPage() {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timer)
-          router.push("/dashboard")
           return 0
         }
         return prev - 1
@@ -22,7 +21,13 @@ export default function LoginSuccessPage() {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [router])
+  }, [])
+
+  useEffect(() => {
+    if (countdown === 0) {
+      router.push("/dashboard")
+    }
+  }, [countdown, router])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-accent/5 p-4">
