@@ -21,6 +21,8 @@ const navigation = [
   { name: 'Plan Trip', href: '/planner' },
   { name: 'Compare', href: '/compare' },
   { name: 'My Trips', href: '/dashboard' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export function Header() {

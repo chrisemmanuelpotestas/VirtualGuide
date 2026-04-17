@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
 import {
   MapPin,
   Calendar,
@@ -12,6 +13,8 @@ import {
   Compass,
   Users,
   GraduationCap,
+  Star,
+  Quote,
 } from 'lucide-react'
 
 const features = [
@@ -59,6 +62,27 @@ const destinations = [
     region: 'MIMAROPA',
     image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600',
     category: 'Beach',
+  },
+]
+
+const testimonials = [
+  {
+    name: 'Maria Santos',
+    role: 'BS Tourism Management Student',
+    content: 'Virtual Guide has been incredibly helpful for my thesis research. The destination comparison tool saved me hours of work!',
+    rating: 5,
+  },
+  {
+    name: 'Juan Dela Cruz',
+    role: 'Tourism Intern',
+    content: 'The itinerary planner is so intuitive. I used it to plan my field study trip to Palawan and everything went smoothly.',
+    rating: 5,
+  },
+  {
+    name: 'Ana Reyes',
+    role: 'BS Hospitality Management Student',
+    content: 'As a student, having access to comprehensive Philippine tourism data in one place is a game-changer for my projects.',
+    rating: 5,
   },
 ]
 
@@ -195,8 +219,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Testimonials Section */}
       <section className="py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">
+              What Students Say
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Hear from fellow Tourism Management students who use Virtual Guide
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="relative">
+                <CardContent className="p-6">
+                  <Quote className="absolute top-4 right-4 h-8 w-8 text-muted-foreground/20" />
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                    &quot;{testimonial.content}&quot;
+                  </p>
+                  <div>
+                    <p className="font-semibold text-foreground">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl bg-primary px-8 py-16 text-center sm:px-16">
             <Users className="mx-auto h-12 w-12 text-primary-foreground/80" />
@@ -219,33 +279,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-muted/30 py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <MapPin className="h-4 w-4 text-primary-foreground" />
-              </div>
-              <span className="font-semibold text-foreground">Virtual Guide</span>
-            </div>
-            <p className="text-center text-sm text-muted-foreground">
-              A research project by BSIT 3A students at First City Providential College
-            </p>
-            <div className="flex gap-6">
-              <Link href="/explore" className="text-sm text-muted-foreground hover:text-foreground">
-                Explore
-              </Link>
-              <Link href="/planner" className="text-sm text-muted-foreground hover:text-foreground">
-                Plan Trip
-              </Link>
-              <Link href="/compare" className="text-sm text-muted-foreground hover:text-foreground">
-                Compare
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
