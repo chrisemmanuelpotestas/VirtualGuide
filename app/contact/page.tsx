@@ -26,13 +26,13 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'virtualguide@fcpc.edu.ph',
+    value: 'chrisemmanuelpotestas024@gmail.com',
     description: 'Send us an email anytime',
   },
   {
     icon: Phone,
     label: 'Phone',
-    value: '+63 (2) 8123 4567',
+    value: '09675046266',
     description: 'Mon-Fri, 8am to 5pm',
   },
   {
