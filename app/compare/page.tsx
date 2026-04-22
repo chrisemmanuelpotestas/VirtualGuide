@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import { ComparisonChart } from '@/components/comparison-chart'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -21,11 +20,6 @@ import { createClient } from '@/lib/supabase/client'
 import {
   MapPin,
   Star,
-  DollarSign,
-  Calendar,
-  Activity,
-  CheckCircle,
-  XCircle,
   Plus,
   X,
   ArrowRight,
@@ -192,9 +186,6 @@ function CompareContent() {
             ))}
           </div>
 
-          {/* Comparison Chart */}
-          <ComparisonChart destinations={selectedDestinations} />
-
           {/* Detailed Comparison Table */}
           <Card>
             <CardHeader>
@@ -279,56 +270,6 @@ function CompareContent() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Activities Comparison */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Available Activities</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {selectedDestinations.map((destination) => (
-                  <div key={destination.id}>
-                    <h4 className="mb-3 font-medium text-foreground">{destination.name}</h4>
-                    <ul className="space-y-2">
-                      {destination.activities.map((activity) => (
-                        <li
-                          key={activity}
-                          className="flex items-center gap-2 text-sm text-muted-foreground"
-                        >
-                          <Activity className="h-3.5 w-3.5 text-primary" />
-                          {activity}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Highlights Comparison */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Key Highlights</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {selectedDestinations.map((destination) => (
-                  <div key={destination.id}>
-                    <h4 className="mb-3 font-medium text-foreground">{destination.name}</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {destination.highlights.map((highlight) => (
-                        <Badge key={highlight} variant="secondary" className="text-xs">
-                          {highlight}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                ))}
               </div>
             </CardContent>
           </Card>
