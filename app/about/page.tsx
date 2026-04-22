@@ -91,7 +91,7 @@ export default function AboutPage() {
                 <span className="text-balance">About Virtual Guide</span>
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-                A capstone project developed by BSIT 3A students at First City Providential College,
+                A capstone project developed by BSIT 4A students at First City Providential College,
                 designed to revolutionize tourism education through technology.
               </p>
             </div>
@@ -161,66 +161,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Technology Stack */}
-        <section className="py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground">
-                Technology Stack
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-                Built with modern, industry-standard technologies
-              </p>
-            </div>
+    
 
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {techStack.map((tech) => (
-                <Card key={tech.name}>
-                  <CardContent className="p-6 text-center">
-                    <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-muted">
-                      <tech.icon className="h-6 w-6 text-foreground" />
-                    </div>
-                    <h3 className="mb-2 font-semibold text-foreground">{tech.name}</h3>
-                    <p className="text-sm text-muted-foreground">{tech.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Team Section */}
-        <section className="bg-muted/30 py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm text-primary">
-                <Users className="h-4 w-4" />
-                <span>The Team</span>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground">
-                Meet the Developers
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-                BSIT 3A students at First City Providential College
-              </p>
-            </div>
-
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {teamMembers.map((member, index) => (
-                <Card key={index}>
-                  <CardContent className="p-6 text-center">
-                    <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-                      <Users className="h-10 w-10 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground">{member.name}</h3>
-                    <p className="text-sm text-muted-foreground">{member.role}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
+       
         {/* CTA Section */}
         <section className="py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
